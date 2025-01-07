@@ -1,0 +1,7 @@
+<resources>
+    <color name="primaryColor">#BB86FC</color> <!-- Light Purple -->
+    <color name="primaryDarkColor">#3700B3</color> <!-- Dark Purple -->
+    <color name="secondaryColor">#03DAC5</color> <!-- Teal -->
+    <color name="backgroundColor">#121212</color> <!-- Dark Background -->
+    <color name="textColor">#FFFFFF</color> <!-- White Text -->
+</resources>

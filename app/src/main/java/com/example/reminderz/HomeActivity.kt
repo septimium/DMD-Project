@@ -1,6 +1,9 @@
 package com.example.reminderz
 
 import android.app.ActivityOptions
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +22,6 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(this, ReminderForegroundService::class.java))
@@ -67,7 +69,6 @@ class HomeActivity : BaseActivity() {
 
         recyclerView.adapter = reminderAdapter
 
-        // Fetch and display active reminders from Room database
         fetchReminders()
 
         val fabAddReminder = findViewById<FloatingActionButton>(R.id.fabAddReminder)
@@ -125,5 +126,7 @@ class HomeActivity : BaseActivity() {
         val options = ActivityOptions.makeCustomAnimation(this, 0, 0)
         startActivity(intent, options.toBundle())
     }
+
+
 }
 

@@ -20,7 +20,7 @@ import java.util.Locale
 
 // 1. Foreground Service
 class ReminderForegroundService : Service() {
-    private val CHANNEL_ID = "ReminderForegroundChannel"
+    private val CHANNEL_ID = "ReminderzChannel"
     private val NOTIFICATION_ID = 1
     private val scope = CoroutineScope(Dispatchers.Default + Job())
 

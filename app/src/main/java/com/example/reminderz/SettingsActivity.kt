@@ -10,6 +10,7 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SettingsActivity : AppCompatActivity() {
@@ -23,10 +24,6 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
-        supportActionBar?.apply {
-            title = "User Settings"
-        }
 
         sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
 
@@ -72,12 +69,14 @@ class SettingsActivity : AppCompatActivity() {
 
         dailyNotificationSwitch.isChecked = isDailyNotificationEnabled
         notificationTimeText.text = "Notification Time: $notificationTime"
+        notificationTimeText.isVisible = isDailyNotificationEnabled
         selectTimeButton.isEnabled = isDailyNotificationEnabled
 
         // Handle notification switch changes
         dailyNotificationSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("daily_notification_enabled", isChecked).apply()
             selectTimeButton.isEnabled = isChecked
+            notificationTimeText.isVisible = isChecked
 
             // Restart the foreground service to apply new settings
             val serviceIntent = Intent(this, ReminderForegroundService::class.java)

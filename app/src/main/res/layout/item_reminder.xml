@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reminder Title"
+            android:textColor="@color/title"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -26,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reminder Description"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/descriptionTime"
             android:textSize="16sp" />
 
         <TextView
@@ -34,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Due Date"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/descriptionTime"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

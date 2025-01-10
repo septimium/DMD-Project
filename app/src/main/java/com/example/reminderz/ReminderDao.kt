@@ -18,9 +18,9 @@ interface ReminderDao {
     @Delete
     suspend fun delete(reminder: Reminder)
 
-    @Query("SELECT * FROM reminders WHERE isCompleted = 0") // Get active reminders
+    @Query("SELECT * FROM reminders WHERE isCompleted = 0")
     suspend fun getActiveReminders(): List<Reminder>
 
-    @Query("SELECT * FROM reminders WHERE isCompleted = 1") // Get completed reminders
+    @Query("SELECT * FROM reminders WHERE isCompleted = 1")
     suspend fun getCompletedReminders(): List<Reminder>
 }

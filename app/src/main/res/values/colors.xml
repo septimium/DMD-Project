@@ -2,6 +2,6 @@
     <color name="primaryColor">#00ACFF</color>
     <color name="backgroundColor">#FFFFFF</color>
     <color name="textColor">#FFFFFF</color>
-    <color name="descriptionTime">#333333</color><!-- White Text -->
+    <color name="descriptionTime">#333333</color>
     <color name="title">#000000</color>
 </resources>

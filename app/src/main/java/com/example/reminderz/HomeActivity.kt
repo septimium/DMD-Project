@@ -1,9 +1,6 @@
 package com.example.reminderz
 
 import android.app.ActivityOptions
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -22,16 +19,13 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(Intent(this, ReminderForegroundService::class.java))
         } else {
             startService(Intent(this, ReminderForegroundService::class.java))
         }
-
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.selectedItemId = R.id.nav_home
-
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> return@setOnItemSelectedListener true
@@ -48,16 +42,13 @@ class HomeActivity : BaseActivity() {
             }
             true
         }
-
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewReminders)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         fetchReminders()
-
         reminderAdapter = ReminderAdapter(
             reminders = emptyList(),
-            onMarkAsCompleted = { reminder, isChecked ->  // This accepts both reminder and isChecked
-                markAsCompleted(reminder, isChecked)       // Pass both reminder and isChecked
+            onMarkAsCompleted = { reminder, isChecked ->
+                markAsCompleted(reminder, isChecked)
             },
             onDeleteReminder = { reminder ->
                 deleteReminder(reminder)
@@ -66,11 +57,8 @@ class HomeActivity : BaseActivity() {
                 shareReminder(reminder)
             }
         )
-
         recyclerView.adapter = reminderAdapter
-
         fetchReminders()
-
         val fabAddReminder = findViewById<FloatingActionButton>(R.id.fabAddReminder)
         fabAddReminder.setOnClickListener {
             val intent = Intent(this, AddReminderActivity::class.java)
@@ -87,7 +75,6 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun markAsCompleted(reminder: Reminder, isChecked: Boolean) {
-        // Mark the reminder as completed or active depending on the checkbox state
         lifecycleScope.launch {
             reminder.isCompleted = isChecked
             reminderDatabase.reminderDao().update(reminder)
@@ -96,14 +83,13 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun deleteReminder(reminder: Reminder) {
-        // Show confirmation dialog and delete the reminder
         android.app.AlertDialog.Builder(this)
             .setTitle("Delete Reminder")
             .setMessage("Are you sure you want to delete this reminder?")
             .setPositiveButton("Yes") { _, _ ->
                 lifecycleScope.launch {
                     reminderDatabase.reminderDao().delete(reminder)
-                    fetchReminders()  // Refresh the list after deletion
+                    fetchReminders()
                 }
             }
             .setNegativeButton("No", null)
@@ -111,13 +97,11 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun shareReminder(reminder: Reminder) {
-        // Create a sharing intent
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "Reminder Title: ${reminder.title}\nDescription: ${reminder.description}\nDue Date: ${reminder.dueDate}\nCompleted: ${reminder.isCompleted}")
             type = "text/plain"
         }
-
         val chooser = Intent.createChooser(shareIntent, "Share Reminder")
         startActivity(chooser)
     }
@@ -126,7 +110,6 @@ class HomeActivity : BaseActivity() {
         val options = ActivityOptions.makeCustomAnimation(this, 0, 0)
         startActivity(intent, options.toBundle())
     }
-
 
 }
 

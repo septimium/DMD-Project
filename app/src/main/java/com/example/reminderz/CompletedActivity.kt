@@ -2,8 +2,6 @@ package com.example.reminderz
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,13 +37,11 @@ class CompletedActivity : BaseActivity() {
         }
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewReminders)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         fetchReminders()
-
         reminderAdapter = ReminderAdapter(
             reminders = emptyList(),
-            onMarkAsCompleted = { reminder, isChecked ->  // This accepts both reminder and isChecked
-                markAsUnCompleted(reminder, isChecked)       // Pass both reminder and isChecked
+            onMarkAsCompleted = { reminder, isChecked ->
+                markAsUnCompleted(reminder, isChecked)
             },
             onDeleteReminder = { reminder ->
                 deleteReminder(reminder)
@@ -54,13 +50,10 @@ class CompletedActivity : BaseActivity() {
                 shareReminder(reminder)
             }
         )
-
         recyclerView.adapter = reminderAdapter
-
-        // Fetch and display active reminders from Room database
         fetchReminders()
-
     }
+
     private fun fetchReminders() {
         lifecycleScope.launch {
             val completedReminders = reminderDatabase.reminderDao().getCompletedReminders()
@@ -69,23 +62,21 @@ class CompletedActivity : BaseActivity() {
     }
 
     private fun markAsUnCompleted(reminder: Reminder, isChecked: Boolean) {
-        // Mark the reminder as completed in the database
         lifecycleScope.launch {
             reminder.isCompleted = isChecked
             reminderDatabase.reminderDao().update(reminder)
-            fetchReminders()  // Refresh the list after marking as completed
+            fetchReminders()
         }
     }
 
     private fun deleteReminder(reminder: Reminder) {
-        // Show confirmation dialog and delete the reminder
         android.app.AlertDialog.Builder(this)
             .setTitle("Delete Reminder")
             .setMessage("Are you sure you want to delete this reminder?")
             .setPositiveButton("Yes") { _, _ ->
                 lifecycleScope.launch {
                     reminderDatabase.reminderDao().delete(reminder)
-                    fetchReminders()  // Refresh the list after deletion
+                    fetchReminders()
                 }
             }
             .setNegativeButton("No", null)
@@ -93,13 +84,11 @@ class CompletedActivity : BaseActivity() {
     }
 
     private fun shareReminder(reminder: Reminder) {
-        // Create a sharing intent
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "Reminder Title: ${reminder.title}\nDescription: ${reminder.description}\nDue Date: ${reminder.dueDate}\nCompleted: ${reminder.isCompleted}")
             type = "text/plain"
         }
-
         val chooser = Intent.createChooser(shareIntent, "Share Reminder")
         startActivity(chooser)
     }

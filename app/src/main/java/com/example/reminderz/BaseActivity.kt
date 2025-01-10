@@ -29,10 +29,10 @@ abstract class BaseActivity : AppCompatActivity() {
     private fun setUpAlarm() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(this, BackgroundReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         val interval = 60 * 1000L
         val triggerTime = System.currentTimeMillis() + interval
-
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             triggerTime,
@@ -40,5 +40,4 @@ abstract class BaseActivity : AppCompatActivity() {
             pendingIntent
         )
     }
-
 }

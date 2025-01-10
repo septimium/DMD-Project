@@ -1,11 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
     <style name="Light.Theme.ReminderZ" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryColor</item> <!-- Dark Purple -->
-        <item name="colorSecondary">@color/primaryColor</item> <!-- Teal -->
-        <item name="backgroundColor">@color/backgroundColor</item> <!-- White Background -->
+        <item name="colorPrimaryDark">@color/primaryColor</item>
+        <item name="colorSecondary">@color/primaryColor</item>
+        <item name="backgroundColor">@color/backgroundColor</item>
         <item name="colorOnPrimary">@color/textColor</item>
     </style>
 </resources>

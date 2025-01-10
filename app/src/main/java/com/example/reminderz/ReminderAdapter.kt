@@ -7,7 +7,7 @@ import com.example.reminderz.databinding.ItemReminderBinding
 
 class ReminderAdapter(
     private var reminders: List<Reminder>,
-    private val onMarkAsCompleted: (Reminder, Boolean) -> Unit, // Now accepts Reminder and Boolean
+    private val onMarkAsCompleted: (Reminder, Boolean) -> Unit,
     private val onDeleteReminder: (Reminder) -> Unit,
     private val onShareReminder: (Reminder) -> Unit
 ) : RecyclerView.Adapter<ReminderAdapter.ReminderViewHolder>() {
@@ -22,22 +22,14 @@ class ReminderAdapter(
         holder.binding.textViewTitle.text = reminder.title
         holder.binding.textViewDescription.text = reminder.description
         holder.binding.textViewDueDate.text = reminder.dueDate
-
         holder.binding.checkBoxComplete.setOnCheckedChangeListener(null)
-
-        // Set the CheckBox state based on reminder completion status
         holder.binding.checkBoxComplete.isChecked = reminder.isCompleted
-
-        // Handle the CheckBox click event
         holder.binding.checkBoxComplete.setOnCheckedChangeListener { _, isChecked ->
             onMarkAsCompleted(reminder, isChecked)
         }
-
-        // Handle Delete button click
         holder.binding.buttonDelete.setOnClickListener {
-            onDeleteReminder(reminder) // Delete the reminder
+            onDeleteReminder(reminder)
         }
-
         holder.binding.buttonShare.setOnClickListener {
             onShareReminder(reminder)
         }

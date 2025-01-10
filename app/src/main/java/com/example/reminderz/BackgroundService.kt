@@ -13,19 +13,16 @@ import java.util.Locale
 
 class BackgroundService : Service() {
     private val scope = CoroutineScope(Dispatchers.IO)
-
     override fun onCreate() {
         super.onCreate()
         startDeletingOldReminders()
     }
-
     private fun startDeletingOldReminders() {
         scope.launch {
             deleteOldReminders()
-            stopSelf() // Stop the service after performing the task
+            stopSelf()
         }
     }
-
     private suspend fun deleteOldReminders() {
         val reminderDao = ReminderDatabase.getDatabase(applicationContext).reminderDao()
         val calendar = Calendar.getInstance()
@@ -36,7 +33,6 @@ class BackgroundService : Service() {
         val completedReminders = reminderDao.getCompletedReminders()
         activeReminders.forEach { reminder ->
             val reminderDate = sdf.parse(reminder.dueDate)
-            // Compare dates
             if (reminderDate != null && reminderDate.before(date30DaysAgo)) {
                 Log.d("BackgroundService", "DELETING REMINDER OLDER THAN 30 DAYS: ${reminder.title}")
                 reminderDao.delete(reminder)
@@ -44,14 +40,11 @@ class BackgroundService : Service() {
         }
         completedReminders.forEach { reminder ->
             val reminderDate = sdf.parse(reminder.dueDate)
-            // Compare dates
             if (reminderDate != null && reminderDate.before(date30DaysAgo)) {
                 Log.d("BackgroundService", "DELETING REMINDER OLDER THAN 30 DAYS: ${reminder.title}")
                 reminderDao.delete(reminder)
             }
         }
     }
-
-
     override fun onBind(intent: Intent?): IBinder? = null
 }

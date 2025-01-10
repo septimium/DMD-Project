@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- Dark Mode Label -->
     <TextView
         android:id="@+id/darkModeLabel"
         android:layout_width="wrap_content"
@@ -19,8 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp" />
-
-    <!-- Dark Mode Switch -->
     <Switch
         android:id="@+id/darkModeSwitch"
         android:layout_width="wrap_content"
@@ -33,7 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="16dp"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
-
     <TextView
         android:id="@+id/notificationLabel"
         android:layout_width="wrap_content"
@@ -46,7 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/darkModeSwitch"
         />
-
     <Switch
         android:id="@+id/dailyNotificationSwitch"
         android:layout_width="wrap_content"
@@ -58,7 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
-
     <Button
         android:id="@+id/selectTimeButton"
         android:layout_width="wrap_content"
@@ -71,7 +64,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
-
     <TextView
         android:id="@+id/notificationTimeText"
         android:layout_width="wrap_content"
@@ -85,11 +77,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:focusable="true"/>
-
-
-
-
-    <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

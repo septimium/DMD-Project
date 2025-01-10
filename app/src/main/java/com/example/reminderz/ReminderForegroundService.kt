@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-// 1. Foreground Service
 class ReminderForegroundService : Service() {
     private val CHANNEL_ID = "ReminderzChannel"
     private val NOTIFICATION_ID = 1
@@ -32,11 +31,8 @@ class ReminderForegroundService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val notification = createNotification()
         startForeground(NOTIFICATION_ID, notification)
-
-        // Start monitoring reminders
         dailyReminders()
         monitorReminders()
-
         return START_STICKY
     }
 
@@ -70,7 +66,6 @@ class ReminderForegroundService : Service() {
         }
     }
 
-
     private fun dailyReminders() {
         scope.launch {
             while (true) {
@@ -82,15 +77,11 @@ class ReminderForegroundService : Service() {
                     val calendar = Calendar.getInstance()
                     val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
                     val currentMinute = calendar.get(Calendar.MINUTE)
-
-                    // Check if it's time for daily notification
                     if (currentHour == targetHour && currentMinute == targetMinute) {
                         checkTodayReminders()
                     }
                 }
-
-                // Check every minute
-                delay(60000) // 1 minute delay
+                delay(60000)
             }
         }
     }
@@ -98,14 +89,9 @@ class ReminderForegroundService : Service() {
     private suspend fun checkTodayReminders() {
         val reminderDao = ReminderDatabase.getDatabase(applicationContext).reminderDao()
         val activeReminders = reminderDao.getActiveReminders()
-
-        // Get the current date in "yyyy-MM-dd" format
         val sdfDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val todayDate = sdfDate.format(Calendar.getInstance().time)
-
-        // Parse reminders for today
         val sdfDateTime = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-
         activeReminders.forEach { reminder ->
             val reminderDate = sdfDateTime.parse(reminder.dueDate)
             if (reminderDate != null && sdfDate.format(reminderDate) == todayDate) {
@@ -114,14 +100,11 @@ class ReminderForegroundService : Service() {
         }
     }
 
-
     private suspend fun checkDueReminders() {
         val reminderDao = ReminderDatabase.getDatabase(applicationContext).reminderDao()
         val activeReminders = reminderDao.getActiveReminders()
-
         val currentTime = Calendar.getInstance().time
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-
         activeReminders.forEach { reminder ->
             val dueDate = sdf.parse(reminder.dueDate)
             if (dueDate != null && currentTime.after(dueDate)) {
@@ -132,27 +115,23 @@ class ReminderForegroundService : Service() {
 
     private fun showReminderNotification(reminder: Reminder) {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
         val notification = NotificationCompat.Builder(this, "ReminderzChannel")
             .setContentTitle("Daily Active Reminder Notification")
             .setContentText(reminder.title+" - "+reminder.dueDate)
             .setSmallIcon(R.drawable.ic_notification)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
-
         notificationManager.notify(reminder.id, notification)
     }
 
     private fun showDueReminderNotification(reminder: Reminder) {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
         val notification = NotificationCompat.Builder(this, "ReminderzChannel")
             .setContentTitle("Due Reminder")
             .setContentText(reminder.title+" - "+reminder.dueDate)
             .setSmallIcon(R.drawable.ic_notification)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
-
         notificationManager.notify(reminder.id, notification)
     }
 

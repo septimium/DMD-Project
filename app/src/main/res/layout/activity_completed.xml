@@ -2,11 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <!-- RecyclerView for reminders -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewReminders"
         android:layout_width="match_parent"
@@ -15,9 +12,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:scrollbars="vertical"
         android:clipToPadding="false" />
-
-    <!-- Floating Action Button (FAB) -->
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

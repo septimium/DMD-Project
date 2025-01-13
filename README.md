@@ -2,6 +2,11 @@
 
 Reminderz is a simple Android app designed to help users manage their reminders and tasks efficiently. The app allows users to create, view, edit, and delete reminders, as well as receive notifications about due and daily reminders. With features like dark mode, daily reminder notifications, and an intuitive UI, Reminderz makes it easy for users to stay on top of their tasks.
 
+## Contributors
+**ȚIGĂERU MIHAI-SEPTIMIU** - [GitHub](https://github.com/septimium)
+
+**ISTUDOR VICTOR-MIHAI** - [GitHub](https://github.com/istudormihai)
+
 ## Features
 
 - **Manage Reminders**: Users can add new reminders, mark them as completed, and delete them.
@@ -52,4 +57,6 @@ To run the app locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/reminderz.git
+   git clone https://github.com/septimium/ReminderZ
+2. Open the project in Android Studio.
+3. Build and run the app on your preferred emulator or physical device.

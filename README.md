@@ -10,8 +10,8 @@ Reminderz is a simple Android app designed to help users manage their reminders 
 ## Features
 
 - **Manage Reminders**: Users can add new reminders, mark them as completed, and delete them.
-- **Daily Reminders**: Notifications are sent at a specified time each day to remind users about their tasks for the day.
-- **Due Reminders**: The app sends notifications for reminders that are due or overdue.
+- **Daily Reminders**: Notifications are sent at a specified time each day to remind users about their tasks for the day. (if enabled)
+- **Due Reminders**: The app sends notifications for reminders that are due or overdue. (hourly or every time you open the home activity)
 - **Foreground Service**: Keeps track of reminders in the background and ensures notifications are sent.
 - **Background Service**: Deletes reminders older than 30 days to keep the app clean and organized.
 - **Dark Mode**: The app supports dark mode, allowing users to switch between light and dark themes based on their preferences.
@@ -22,8 +22,8 @@ Reminderz is a simple Android app designed to help users manage their reminders 
 ### 1. **Activities**
    - **HomeActivity**: The main screen that displays a list of active reminders, allows users to mark reminders as completed, and delete them. It also provides a floating action button (FAB) to add new reminders.
    - **CompletedActivity**: Displays a list of completed reminders. Users can restore or delete these reminders.
-   - **AddReminderActivity**: A form for adding or editing reminders, including fields for title, description, due date, and repeat settings.
-   - **SettingsActivity**: Manages user preferences, such as enabling dark mode and setting a time for daily notifications.
+   - **AddReminderActivity**: A form for adding reminders, including fields for title, description, due date, and repeat settings.
+   - **SettingsActivity**: Manages user preferences, such as enabling dark mode and enabling & setting a time for daily notifications.
    - **BaseActivity**: Manages global settings, such as dark mode, for all activities.
 
 ### 2. **Services**
@@ -35,7 +35,7 @@ Reminderz is a simple Android app designed to help users manage their reminders 
 
 ### 4. **Room Database**
    - **ReminderDatabase**: A Room database that stores reminders persistently. It includes methods to fetch active and completed reminders, as well as delete reminders.
-   - **ReminderDao**: A Data Access Object (DAO) that provides methods for interacting with the database, including adding, updating, and deleting reminders.
+   - **ReminderDao**: A Data Access Object (DAO) that provides methods for interacting with the database, including adding and deleting reminders.
 
 ### 5. **Notification Manager**
    - **NotificationCompat**: Used to create and display notifications for due and daily reminders. The app sends high-priority notifications to the user based on the reminder’s due date.

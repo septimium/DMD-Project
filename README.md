@@ -1,6 +1,6 @@
 # Reminderz App
 
-Reminderz is a simple Android app designed to help users manage their reminders and tasks efficiently. The app allows users to create, view, edit, and delete reminders, as well as receive notifications about due and daily reminders. With features like dark mode, daily reminder notifications, and an intuitive UI, Reminderz makes it easy for users to stay on top of their tasks.
+Reminderz is a simple Android app designed to help users manage their reminders and tasks efficiently. The app allows users to create, view, edit, and delete reminders, as well as receive notifications about due and daily reminders. With features like dark mode, daily reminder notifications, and an intuitive UI, Reminderz makes it easy for users to stay on top of their tasks. [Project Link](https://github.com/septimium/ReminderZ)
 
 ## Contributors
 **ȚIGĂERU MIHAI-SEPTIMIU** - [GitHub](https://github.com/septimium)
@@ -49,9 +49,7 @@ Reminderz is a simple Android app designed to help users manage their reminders 
 ### 8. **Coroutines**
    - **CoroutineScope**: Used in services to perform background tasks (like deleting old reminders or monitoring reminders) without blocking the main thread. Coroutines are used for performing tasks asynchronously, such as checking for due reminders at regular intervals.
 
----
-
-### Installation
+## Installation
 
 To run the app locally, follow these steps:
 
